@@ -1,0 +1,25 @@
+amends "package://github.com/jdx/hk/releases/download/v1.53.0/hk@1.53.0#/Config.pkl"
+
+// Checks live as mise tasks so the hook and CI run the same command.
+local linters = new Mapping<String, Step> {
+    ["renovate-validate"] {
+        glob = "*.json5"
+        check = "mise run validate"
+    }
+    ["zizmor"] {
+        // Offline locally (no token needed); CI runs it online.
+        glob = ".github/workflows/*.{yml,yaml}"
+        check = "zizmor --offline .github/workflows/"
+    }
+}
+
+hooks {
+    ["pre-commit"] {
+        // Validate only what's staged.
+        stash = "git"
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}

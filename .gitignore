@@ -35,4 +35,5 @@ atlassian-ide-plugin.xml
 
 # Claude Code (keep shared config, ignore per-user local state)
 .claude/settings.local.json
+.claude/worktrees/
 CLAUDE.local.md

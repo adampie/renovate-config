@@ -44,5 +44,9 @@ mise run validate  # validate presets
 mise run zizmor    # audit workflows (needs a token)
 ```
 
+`renovate-config-validator` checks syntax and schema only; it does not fetch
+remote presets, so a broken `extends` target passes locally and only surfaces on
+Renovate's next run.
+
 The hook and CI call the same `mise run` tasks.
 [zizmor](https://docs.zizmor.sh/) runs offline in the hook, online in CI.

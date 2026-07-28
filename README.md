@@ -8,11 +8,16 @@ for dependency-update policy.
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>adampie/renovate-config"]
+  "extends": ["github>adampie/renovate-config:default.json5"]
 }
 ```
 
-Resolves to `default.json5` (on top of `config:best-practices`):
+The `:default.json5` suffix is required. Renovate only auto-discovers a preset
+named `default.json` (or the deprecated `renovate.json`), so a bare
+`github>adampie/renovate-config` fails with "Cannot find preset's package" and
+blocks Renovate for the consuming repo.
+
+`default.json5` sits on top of `config:best-practices`:
 
 - 7-day minimum release age.
 - Automerge minor/patch/pin/digest and lock-file updates; majors reviewed on the

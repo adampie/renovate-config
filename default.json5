@@ -1,0 +1,53 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  // Org default preset. Extend with: github>adampie/renovate-config
+
+  extends: [
+    // Digest pinning, config migration, weekly lock-file maintenance.
+    "config:best-practices",
+  ],
+
+  // No schedule here: each repo picks its own cadence.
+
+  // Dashboard issue, with a summary of open OSV vulnerabilities.
+  dependencyDashboard: true,
+  dependencyDashboardOSVVulnerabilitySummary: "unresolved",
+
+  // Fix PRs for known vulnerabilities (Dependabot alerts + OSV).
+  vulnerabilityAlerts: {
+    enabled: true,
+    labels: ["security"],
+  },
+  osvVulnerabilityAlerts: true,
+
+  // chore(deps): commit messages across the org.
+  semanticCommits: "enabled",
+
+  labels: ["dependencies"],
+
+  // One PR per major version.
+  separateMultipleMajor: true,
+
+  // Skip releases younger than a week (supply-chain safety).
+  minimumReleaseAge: "7 days",
+
+  // Automerge the weekly lock-file refresh.
+  lockFileMaintenance: {
+    automerge: true,
+  },
+
+  packageRules: [
+    // Automerge low-risk updates once checks pass. On GitHub this needs branch
+    // protection without required reviews (see README).
+    {
+      matchUpdateTypes: ["minor", "patch", "pin", "digest"],
+      automerge: true,
+    },
+    // Majors are reviewed by a human.
+    {
+      matchUpdateTypes: ["major"],
+      automerge: false,
+    },
+  ],
+}

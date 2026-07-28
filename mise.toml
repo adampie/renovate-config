@@ -1,0 +1,17 @@
+[tools]
+node = "24.14.0"
+pnpm = "11.17.0"
+hk = "1.53.0"
+"npm:renovate" = "43.285.7"
+zizmor = "1.28.0"
+
+[settings.npm]
+package_manager = "pnpm"
+
+[tasks.validate]
+description = "Validate the Renovate preset and this repo's self-config"
+run = "renovate-config-validator --strict --no-global default.json5 renovate.json5"
+
+[tasks.zizmor]
+description = "Audit the GitHub Actions workflows for security issues"
+run = "zizmor .github/workflows/"

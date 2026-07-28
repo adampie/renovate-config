@@ -1,7 +1,10 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
 
-  // Org default preset. Extend with: github>adampie/renovate-config
+  // Org default preset. Extend with:
+  //   github>adampie/renovate-config:default.json5
+  // The filename can't be omitted: a bare `github>adampie/renovate-config`
+  // only ever looks for default.json (or the deprecated renovate.json).
 
   extends: [
     // Digest pinning, config migration, weekly lock-file maintenance.

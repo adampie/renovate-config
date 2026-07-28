@@ -25,6 +25,12 @@ jobs:
           persist-credentials: false
       - name: Set up mise toolchain
         uses: jdx/mise-action@9e7f7633ff6f6d6048a9418a68d48f288f50eb14 # v4.2.3
+        with:
+          # npm-backend tools install as a pnpm symlink farm pointing into
+          # pnpm's global store, which lives outside the cached mise dir. A
+          # cache hit restores the links without their targets, so renovate's
+          # entry point disappears. Install fresh instead.
+          cache: false
       - name: Validate Renovate config
         run: mise run validate
       # zizmor's online audits need a token; the built-in one is enough.

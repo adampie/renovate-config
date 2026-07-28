@@ -1,7 +1,8 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
-    "local>adampie/renovate-config",
+    // Filename is explicit: bare references only resolve default.json.
+    "local>adampie/renovate-config:default.json5",
     "schedule:weekly",
   ],
 }

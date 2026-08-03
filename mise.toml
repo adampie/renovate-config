@@ -2,7 +2,7 @@
 node = "24.18.0"
 pnpm = "11.17.0"
 hk = "1.53.0"
-"npm:renovate" = "43.286.0"
+"npm:renovate" = "43.288.0"
 zizmor = "1.28.0"
 
 [settings.npm]

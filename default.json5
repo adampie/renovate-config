@@ -29,6 +29,10 @@
 
   labels: ["dependencies"],
 
+  // assignAutomerge stays at its default of false, so in practice only the
+  // human-reviewed majors get assigned.
+  assignees: ["adampie"],
+
   // One PR per major version.
   separateMultipleMajor: true,
 

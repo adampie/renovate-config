@@ -1,6 +1,6 @@
 [tools]
 node = "24.18.0"
-pnpm = "11.27.1"
+pnpm = "11.28.3"
 hk = "1.58.1"
 "npm:renovate" = "43.288.0"
 zizmor = "1.30.1"

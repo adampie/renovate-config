@@ -23,18 +23,17 @@ jobs:
         with:
           # Read-only job; don't persist credentials (artipacked).
           persist-credentials: false
-      - name: Set up mise toolchain
-        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+      - name: Install Nix
+        uses: cachix/install-nix-action@75c75c31ebece974e48ebc36b4ad125bd97bd97b # v31.11.3
+      - name: Use the devenv binary cache
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
         with:
-          # npm-backend tools install as a pnpm symlink farm pointing into
-          # pnpm's global store, which lives outside the cached mise dir. A
-          # cache hit restores the links without their targets, so renovate's
-          # entry point disappears. Install fresh instead.
-          cache: false
-      - name: Validate Renovate config
-        run: mise run validate
-      # zizmor's online audits need a token; the built-in one is enough.
-      - name: Audit workflows with zizmor
+          name: devenv
+      - name: Install devenv
+        run: nix profile add nixpkgs#devenv
+      # Runs the git hooks: Renovate validation and zizmor.
+      - name: Validate Renovate config and audit workflows
         env:
+          # zizmor's online audits need a token; the built-in one is enough.
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mise run zizmor
+        run: devenv test

@@ -31,22 +31,21 @@ Override anything per repo by adding config after `extends`.
 
 - `default.json5`: org preset consumers extend.
 - `renovate.json5`: this repo, extending the preset plus a weekly schedule.
-- `mise.toml`: pinned tools and the `validate` / `zizmor` tasks.
-- `hk.pkl`: pre-commit hooks (validate presets, audit workflows).
+- `devenv.nix`: tools, the `validate` / `audit-workflows` scripts and the
+  pre-commit hooks that run them.
 - `.github/workflows/validate.yml`: CI runs both on PRs and pushes to `main`.
 
 ## Development
 
 ```sh
-mise install       # pinned toolchain
-hk install         # wire pre-commit hooks (once)
-mise run validate  # validate presets
-mise run zizmor    # audit workflows (needs a token)
+devenv shell     # toolchain; installs the pre-commit hooks on entry
+validate         # validate presets
+audit-workflows  # audit workflows (needs a token for online audits)
 ```
 
 `renovate-config-validator` checks syntax and schema only; it does not fetch
 remote presets, so a broken `extends` target passes locally and only surfaces on
 Renovate's next run.
 
-The hook and CI call the same `mise run` tasks.
-[zizmor](https://docs.zizmor.sh/) runs offline in the hook, online in CI.
+CI runs `devenv test`, which runs the same hooks.
+[zizmor](https://docs.zizmor.sh/) runs offline without `GH_TOKEN`, online in CI.

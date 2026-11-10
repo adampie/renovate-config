@@ -37,3 +37,8 @@ atlassian-ide-plugin.xml
 .claude/settings.local.json
 .claude/worktrees/
 CLAUDE.local.md
+
+# devenv
+.devenv*
+devenv.local.nix
+.pre-commit-config.yaml

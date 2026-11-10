@@ -1,7 +1,7 @@
 [tools]
 node = "24.22.2"
 pnpm = "11.28.11"
-hk = "1.58.1"
+hk = "2.11.1"
 "npm:renovate" = "43.288.0"
 zizmor = "1.31.1"
 
